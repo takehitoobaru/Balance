@@ -49,7 +49,7 @@ public class SceneController : SingletonMonoBehaviour<SceneController>
     public void ChangeScene(string currentScene,string nextScene)
     {
         //シーンをロードしてアクティブに切り替え
-        var next = SceneManager.LoadSceneAsync(currentScene, LoadSceneMode.Additive);
+        var next = SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Additive);
         next.completed += x => SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
         //現在のシーンを削除
         SceneManager.UnloadSceneAsync(currentScene);
