@@ -10,6 +10,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     #region property
     public Vector2 ScreenLeftBottom => _screenLeftBottom;
     public Vector2 ScreenRightTop => _screenRightTop;
+    public bool CanPlay => _canPlay;
     #endregion
 
     #region private
@@ -31,6 +32,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private Vector2 _screenLeftBottom;
     /// <summary>‰æ–Ê‰Eã</summary>
     private Vector2 _screenRightTop;
+    /// <summary>‘€ì‚Å‚«‚é‚©‚Ç‚¤‚©</summary>
+    private bool _canPlay = true;
     #endregion
 
     #region Constant
@@ -112,6 +115,21 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         Debug.Log("–ìØ:" + _vegetableAmount);
 
         Debug.Log("‘®«‡Œv:" + _vegetableAmount);
+    }
+
+    /// <summary>
+    /// ‘€ì‰Â”\‚©‚Ç‚¤‚©‚ğØ‚è‘Ö‚¦‚é
+    /// </summary>
+    public void ChangeCanPlay()
+    {
+        if(_canPlay == true)
+        {
+            _canPlay = false;
+        }
+        else
+        {
+            _canPlay = true;
+        }
     }
     #endregion
 
