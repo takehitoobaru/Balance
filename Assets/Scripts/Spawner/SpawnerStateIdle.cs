@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class SpawnerStateIdle : ISpawnerState
 {
     #region property
@@ -6,6 +8,8 @@ public class SpawnerStateIdle : ISpawnerState
 
     #region private
     private Spawner _spawner;
+    private int _randMin = 0;
+    private int _randMax = 100;
     #endregion
 
     #region public method
@@ -17,9 +21,18 @@ public class SpawnerStateIdle : ISpawnerState
 
     public void Update()
     {
-        if(_spawner.IsWait == false)
+        if (_spawner.IsWait == false)
         {
-            _spawner.FoodSpawn();
+            int rand = Random.Range(_randMin, _randMax);
+            if (rand < 80)
+            {
+                _spawner.FoodSpawn();
+            }
+            else
+            {
+                _spawner.NotFoodSpawn();
+            }
+
         }
     }
 
