@@ -169,7 +169,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _foodPrefabs:
   - {fileID: 7197050345227780166, guid: 904e7ac84f35a754d9d4a6d2dcb41636, type: 3}
-  _notFoodPrefabs: []
+  - {fileID: 6870512496080181331, guid: 34ad570bd2a43594c996213ff74a5e78, type: 3}
+  - {fileID: 5503487656101271761, guid: 78404049125c577458671b5592a7f337, type: 3}
+  - {fileID: 3085018405892397936, guid: d2a394c87cbc76147b6dc42d25006b08, type: 3}
+  _notFoodPrefabs:
+  - {fileID: 7527681628859979007, guid: 2cf3b62f36ef36041b18f7cfd072ee39, type: 3}
   _spawnCoolTime: 1.5
 --- !u!1 &1091573373
 GameObject:
@@ -303,7 +307,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
