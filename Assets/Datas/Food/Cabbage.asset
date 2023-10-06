@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Cabbage
   m_EditorClassIdentifier: 
   _objectType: 0
-  _scoreAmount: 10
+  _scoreAmount: 30
   _carbohydreatAmount: 0
   _meatAmount: 0
   _fishAmount: 0
-  _vegetableAmount: 10
+  _vegetableAmount: 50

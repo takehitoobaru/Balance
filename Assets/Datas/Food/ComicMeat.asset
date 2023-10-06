@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ComicMeat
   m_EditorClassIdentifier: 
   _objectType: 0
-  _scoreAmount: 10
+  _scoreAmount: 30
   _carbohydreatAmount: 0
-  _meatAmount: 10
+  _meatAmount: 50
   _fishAmount: 0
   _vegetableAmount: 0
