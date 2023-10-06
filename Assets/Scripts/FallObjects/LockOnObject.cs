@@ -7,23 +7,17 @@ using UnityEngine;
 /// </summary>
 public class LockOnObject : FallObjectBase
 {
-    #region property
-    #endregion
-
     #region serialize
+    [Tooltip("滞空時間")]
     [SerializeField]
     private float _waitTime = 4.0f;
     #endregion
 
     #region private
+    /// <summary>プレイヤー</summary>
     private PlayerController _player;
+    /// <summary>滞空中かどうか</summary>
     private bool _isWait = true;
-    #endregion
-
-    #region Constant
-    #endregion
-
-    #region Event
     #endregion
 
     #region unity methods
@@ -34,6 +28,7 @@ public class LockOnObject : FallObjectBase
 
     private void Start()
     {
+        //コンポーネント取得
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
@@ -45,6 +40,7 @@ public class LockOnObject : FallObjectBase
 
     private void Update()
     {
+        //滞空中なら
         if(_isWait == true)
         {
             transform.position = new Vector2(_player.transform.position.x, transform.position.y);
@@ -57,14 +53,11 @@ public class LockOnObject : FallObjectBase
     }
     #endregion
 
-    #region public method
-    #endregion
-
-    #region private method
-
-    #endregion
-
     #region coroutine method
+    /// <summary>
+    /// 一定時間待ってから落下する
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator WaitCoroutine()
     {
         yield return new WaitForSeconds(_waitTime);

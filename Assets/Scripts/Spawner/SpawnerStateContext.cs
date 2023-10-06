@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 
+/// <summary>
+/// ’‡‰îƒNƒ‰ƒX
+/// </summary>
 public class SpawnerStateContext
 {
     #region private
@@ -33,7 +36,6 @@ public class SpawnerStateContext
         if (_currentState == null || _currentState.SpawnerState == next) return;
         var nextState = _stateTable[next];
         _previousState = _currentState;
-        _previousState?.Exit();
         _currentState = nextState;
         _currentState.Entry();
     }

@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// ‘Ò‹@ó‘Ô
+/// </summary>
 public class SpawnerStateIdle : ISpawnerState
 {
     #region property
@@ -21,6 +24,7 @@ public class SpawnerStateIdle : ISpawnerState
 
     public void Update()
     {
+        //‘Ò‹@ó‘Ô‚ª‰ğ‚¯‚½‚È‚ç
         if (_spawner.IsWait == false)
         {
             int rand = Random.Range(_randMin, _randMax);
@@ -34,11 +38,6 @@ public class SpawnerStateIdle : ISpawnerState
             }
 
         }
-    }
-
-    public void Exit()
-    {
-
     }
     #endregion
 }

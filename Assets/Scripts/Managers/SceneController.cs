@@ -8,35 +8,10 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class SceneController : SingletonMonoBehaviour<SceneController>
 {
-    #region property
-    #endregion
-
-    #region serialize
-    #endregion
-
-    #region private
-    #endregion
-
-    #region Constant
-    #endregion
-
-    #region Event
-    #endregion
-
     #region unity methods
     protected override void Awake()
     {
         base.Awake();
-    }
-
-    private void Start()
-    {
-
-    }
-
-    private void Update()
-    {
-
     }
     #endregion
 
@@ -54,8 +29,5 @@ public class SceneController : SingletonMonoBehaviour<SceneController>
         //Œ»İ‚ÌƒV[ƒ“‚ğíœ
         SceneManager.UnloadSceneAsync(currentScene);
     }
-    #endregion
-
-    #region private method
     #endregion
 }

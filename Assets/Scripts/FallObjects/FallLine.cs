@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 落下位置を示すライン
+/// </summary>
 [RequireComponent(typeof(LineRenderer))]
 public class FallLine : MonoBehaviour
 {
-    #region property
-    #endregion
-
     #region serialize
     [Tooltip("横幅")]
     [SerializeField]
@@ -19,29 +19,21 @@ public class FallLine : MonoBehaviour
     #endregion
 
     #region private
+    /// <summary>頂点数</summary>
     private int _vertexCount = 2;
+    /// <summary>ラインレンダラー</summary>
     private LineRenderer _renderer;
-    #endregion
-
-    #region Constant
-    #endregion
-
-    #region Event
     #endregion
 
     #region unity methods
     private void Awake()
     {
         _renderer = GetComponent<LineRenderer>();
-        _renderer.SetWidth(_width, _width);
-        _renderer.SetVertexCount(_vertexCount);
+        _renderer.startWidth = _width;
+        _renderer.endWidth = _width;
+        _renderer.positionCount = 2;
         _renderer.SetPosition(0,transform.position);
         _renderer.SetPosition(1, new Vector2(transform.position.x, _endPos));
-    }
-
-    private void Start()
-    {
-
     }
 
     private void Update()
@@ -49,11 +41,5 @@ public class FallLine : MonoBehaviour
         _renderer.SetPosition(0, transform.position);
         _renderer.SetPosition(1, new Vector2(transform.position.x, _endPos));
     }
-    #endregion
-
-    #region public method
-    #endregion
-
-    #region private method
     #endregion
 }

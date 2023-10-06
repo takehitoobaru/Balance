@@ -2,23 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// まっすぐ落下するオブジェクト
+/// </summary>
 public class SimpleFallObject : FallObjectBase
 {
-    #region property
-    #endregion
-
-    #region serialize
-    #endregion
-
-    #region private
-    #endregion
-
-    #region Constant
-    #endregion
-
-    #region Event
-    #endregion
-
     #region unity methods
     protected override void Awake()
     {
@@ -27,6 +15,7 @@ public class SimpleFallObject : FallObjectBase
 
     private void OnEnable()
     {
+        //落下
         _rb.velocity = new Vector2(_rb.velocity.x, -_fallSpeed);
     }
 
@@ -34,11 +23,5 @@ public class SimpleFallObject : FallObjectBase
     {
         base.OnTriggerEnter2D(collision);
     }
-    #endregion
-
-    #region public method
-    #endregion
-
-    #region private method
     #endregion
 }

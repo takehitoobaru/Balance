@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 落下物のベースクラス
+/// </summary>
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class FallObjectBase : MonoBehaviour, IGetable
@@ -44,11 +47,14 @@ public abstract class FallObjectBase : MonoBehaviour, IGetable
     #region unity methods
     protected virtual void Awake()
     {
+        //各値をデータから取得
         _scoreAmount = _objectData.ScoreAmount;
         _carbohydreatAmount = _objectData.Carbohydreat;
         _meatAmount = _objectData.MeatAmount;
         _fishAmount = _objectData.FishAmount;
         _vegetableAmount = _objectData.VegetableAmount;
+
+        //コンポーネント取得
         _rb = GetComponent<Rigidbody2D>();
         _col = GetComponent<BoxCollider2D>();
     }
@@ -79,11 +85,8 @@ public abstract class FallObjectBase : MonoBehaviour, IGetable
     /// <param name="vegetableAmount">野菜値</param>
     public void Get(int scoreAmount, int carbohydreatAmount, int meatAmount, int fishAmount, int vegetableAmount)
     {
-        GameManager.Instance.AddScore(scoreAmount);
-        GameManager.Instance.AddElement(carbohydreatAmount, meatAmount, fishAmount, vegetableAmount);
+        InGameManager.Instance.AddScore(scoreAmount);
+        InGameManager.Instance.AddElement(carbohydreatAmount, meatAmount, fishAmount, vegetableAmount);
     }
-    #endregion
-
-    #region private method
     #endregion
 }

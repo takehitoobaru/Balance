@@ -17,11 +17,6 @@ public interface ISpawnerState
     /// フレームごとに実行
     /// </summary>
     public void Update();
-
-    /// <summary>
-    /// 状態終了時に実行
-    /// </summary>
-    public void Exit();
     #endregion
 }
 

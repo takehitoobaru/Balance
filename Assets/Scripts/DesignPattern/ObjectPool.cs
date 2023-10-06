@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// オブジェクトプール
+/// </summary>
 public class ObjectPool : SingletonMonoBehaviour<ObjectPool>
 {
     #region private

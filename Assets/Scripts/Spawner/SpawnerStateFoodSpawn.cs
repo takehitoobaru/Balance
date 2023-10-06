@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// êHï®ê∂ê¨èÛë‘
+/// </summary>
 public class SpawnerStateFoodSpawn : ISpawnerState
 {
     #region property
@@ -15,7 +18,9 @@ public class SpawnerStateFoodSpawn : ISpawnerState
 
     public void Entry()
     {
+        //ê∂ê¨à íuåàíË
         _spawner.SetSpawnPos();
+        //ê∂ê¨
         int rand = Random.Range(0, _spawner.FoodPrefabs.Length);
         ObjectPool.Instance.GetGameObject(_spawner.FoodPrefabs[rand], _spawner.SpawnPos);
     }
@@ -23,11 +28,6 @@ public class SpawnerStateFoodSpawn : ISpawnerState
     public void Update()
     {
         _spawner.Idle();
-    }
-
-    public void Exit()
-    {
-
     }
     #endregion
 }

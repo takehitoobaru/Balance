@@ -11,7 +11,6 @@ public class Spawner : MonoBehaviour
     public GameObject[] FoodPrefabs => _foodPrefabs;
     public GameObject[] NotFoodPrefabs => _notFoodPrefabs;
     public bool IsWait => _isWait;
-
     public Vector2 SpawnPos => _spawnPos;
     #endregion
 
@@ -30,10 +29,15 @@ public class Spawner : MonoBehaviour
     #endregion
 
     #region private
+    /// <summary>待機中かどうか</summary>
     private bool _isWait = false;
+    /// <summary>context</summary>
     private SpawnerStateContext _context;
+    /// <summary>生成位置</summary>
     private Vector2 _spawnPos;
+    /// <summary>最小ランダム位置</summary>
     private float _minPos = -8;
+    /// <summary>最大ランダム位置</summary>
     private float _maxPos = 8;
     #endregion
 
@@ -51,16 +55,25 @@ public class Spawner : MonoBehaviour
     #endregion
 
     #region public method
+    /// <summary>
+    /// 待機
+    /// </summary>
     public void Idle()
     {
         _context.ChangeState(SpawnerState.Idle);
     }
 
+    /// <summary>
+    /// 食物生成
+    /// </summary>
     public void FoodSpawn()
     {
         _context.ChangeState(SpawnerState.FoodSpawn);
     }
 
+    /// <summary>
+    /// 非食物生成
+    /// </summary>
     public void NotFoodSpawn()
     {
         _context.ChangeState(SpawnerState.NotFoodSpawn);
