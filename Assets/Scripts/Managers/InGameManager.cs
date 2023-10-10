@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// ゲーム本編の管理
@@ -12,11 +13,36 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     #endregion
 
     #region serialize
+    [Tooltip("ゲームオーバーになる値　下")]
+    [SerializeField]
+    private float _percentMin = 0.1f;
+
+    [Tooltip("ゲームオーバーになる値　上")]
+    [SerializeField]
+    private float _percentMax = 0.7f;
+
+    [Tooltip("カウントダウンテキスト")]
+    [SerializeField]
+    private TextMeshProUGUI _countDownText = default;
+
+    [Tooltip("タイムテキスト")]
+    [SerializeField]
+    private TextMeshProUGUI _timeText = default;
+
+    [Tooltip("スコアテキスト")]
+    [SerializeField]
+    private TextMeshProUGUI _scoreText = default;
+
+    [Tooltip("ゲーム終了時のテキスト")]
+    [SerializeField]
+    private TextMeshProUGUI _gameEndText = default;
     #endregion
 
     #region private
     /// <summary>スコア</summary>
     private int _score = 0;
+    /// <summary>タイム</summary>
+    private float _time = 180;
     /// <summary>属性値の合計</summary>
     private float _elementSum = 0;
     /// <summary>炭水化物属性値</summary>
@@ -36,7 +62,9 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     /// <summary>野菜割合</summary>
     private float _vegetablePercent = 0;
     /// <summary>操作できるかどうか</summary>
-    private bool _canPlay = true;
+    private bool _canPlay = false;
+    /// <summary>タイムオーバー処理したかどうか</summary>
+    private bool _timeInit = false;
     #endregion
 
     #region Constant
@@ -90,6 +118,26 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
         _fishAmount = FISH_BASE;
         _vegetableAmount = VEGETABLE_BASE;
         _elementSum = _carbohydrateAmount + _meatAmount + _fishAmount + _vegetableAmount;
+
+        //カウントダウン
+        StartCoroutine(ThreeCountCoroutine());
+    }
+
+    private void Update()
+    {
+        //タイムオーバーなら
+        if(_time <= 0 && _timeInit == false)
+        {
+            GamePlayEnd();
+            _timeInit = true;
+        }
+        //プレイ可能なら処理実行
+        if (CanPlay == false) return;
+        //タイム経過
+        _time -= Time.deltaTime;
+        //テキスト更新
+        _timeText.text = "Time:" + _time.ToString("F0");
+        _scoreText.text = "Score:" + _score.ToString();
     }
     #endregion
 
@@ -167,6 +215,8 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
         {
             OnVegetablePercentChanged.Invoke(_vegetablePercent);
         }
+
+        CheckPercentage();
     }
 
     /// <summary>
@@ -182,6 +232,78 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
         {
             _canPlay = true;
         }
+    }
+
+    /// <summary>
+    /// ゲームプレイエンド時
+    /// </summary>
+    public void GamePlayEnd()
+    {
+        ChangeCanPlay();
+        _gameEndText.gameObject.SetActive(true);
+        if (_time <= 0)
+        {
+            _gameEndText.text = "TimeOver!";
+        }
+        else
+        {
+            _gameEndText.text = "GameOver";
+        }
+        StartCoroutine(PlayEndCoroutine());
+    }
+    #endregion
+
+    #region private method
+    /// <summary>
+    /// ゲームオーバー値を超えていないかチェック
+    /// </summary>
+    private void CheckPercentage()
+    {
+        if(_carbohydreatPercent <= _percentMin || _carbohydreatPercent >= _percentMax || 
+            _meatPercent <= _percentMin || _meatPercent >= _percentMax ||
+            _fishPercent <= _percentMin || _fishPercent >= _percentMax ||
+            _vegetablePercent <= _percentMin || _vegetablePercent >= _percentMax)
+        {
+            GamePlayEnd();
+        }
+    }
+
+    /// <summary>
+    /// リザルトへ移動
+    /// </summary>
+    private void GoResult()
+    {
+        SceneController.Instance.ChangeScene("InGameScene", "ResultScene");
+    }
+    #endregion
+
+    #region coroutine method
+    /// <summary>
+    /// スタートカウントダウン
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator ThreeCountCoroutine()
+    {
+        _countDownText.text = "3";
+        yield return new WaitForSeconds(1);
+        _countDownText.text = "2";
+        yield return new WaitForSeconds(1);
+        _countDownText.text = "1";
+        yield return new WaitForSeconds(1);
+        _countDownText.text = "Start!";
+        ChangeCanPlay();
+        yield return new WaitForSeconds(0.5f);
+        _countDownText.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// 待ってからリザルトへ移行
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator PlayEndCoroutine()
+    {
+        yield return new WaitForSeconds(2);
+        GoResult();
     }
     #endregion
 }
