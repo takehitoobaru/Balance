@@ -50,6 +50,7 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+        if (InGameManager.Instance.CanPlay == false) return;
         _context.Update();
     }
     #endregion
