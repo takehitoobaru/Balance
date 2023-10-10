@@ -38,8 +38,9 @@ public class LockOnObject : FallObjectBase
         StartCoroutine(WaitCoroutine());
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         //‘Ø‹ó’†‚È‚ç
         if(_isWait == true)
         {

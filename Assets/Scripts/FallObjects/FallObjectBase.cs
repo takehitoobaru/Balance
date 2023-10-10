@@ -59,6 +59,15 @@ public abstract class FallObjectBase : MonoBehaviour, IGetable
         _col = GetComponent<BoxCollider2D>();
     }
 
+    protected virtual void Update()
+    {
+        //プレイ可能でないならプールに戻る
+        if(InGameManager.Instance.CanPlay == false)
+        {
+            ObjectPool.Instance.ReleaseGameObject(gameObject);
+        }
+    }
+
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         //プレイヤーに接触したら

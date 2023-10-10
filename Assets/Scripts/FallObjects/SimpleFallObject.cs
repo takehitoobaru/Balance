@@ -13,6 +13,11 @@ public class SimpleFallObject : FallObjectBase
         base.Awake();
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     private void OnEnable()
     {
         //—Ž‰º
