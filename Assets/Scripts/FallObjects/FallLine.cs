@@ -31,7 +31,7 @@ public class FallLine : MonoBehaviour
         _renderer = GetComponent<LineRenderer>();
         _renderer.startWidth = _width;
         _renderer.endWidth = _width;
-        _renderer.positionCount = 2;
+        _renderer.positionCount = _vertexCount;
         _renderer.SetPosition(0,transform.position);
         _renderer.SetPosition(1, new Vector2(transform.position.x, _endPos));
     }
