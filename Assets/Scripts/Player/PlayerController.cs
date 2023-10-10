@@ -46,6 +46,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void MovePlayer()
     {
+        if (InGameManager.Instance.CanPlay == false)
+        {
+            _rb.velocity = Vector2.zero;
+            return;
+        }
         //左右キーの入力
         float key = Input.GetAxisRaw("Horizontal");
         //ベロシティ設定
