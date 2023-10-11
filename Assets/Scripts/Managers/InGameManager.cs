@@ -36,13 +36,17 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     [Tooltip("ゲーム終了時のテキスト")]
     [SerializeField]
     private TextMeshProUGUI _gameEndText = default;
+
+    [Tooltip("パーセントを隠すパネル")]
+    [SerializeField]
+    private GameObject _hidePanel = default;
     #endregion
 
     #region private
     /// <summary>スコア</summary>
     private int _score = 0;
     /// <summary>タイム</summary>
-    private float _time = 180;
+    private float _time = 120;
     /// <summary>属性値の合計</summary>
     private float _elementSum = 0;
     /// <summary>炭水化物属性値</summary>
@@ -63,8 +67,10 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     private float _vegetablePercent = 0;
     /// <summary>操作できるかどうか</summary>
     private bool _canPlay = false;
-    /// <summary>タイムオーバー処理したかどうか</summary>
-    private bool _timeInit = false;
+    /// <summary>hidePanelをアクティブにしたかどうか</summary>
+    private bool _panelInit = false;
+    /// <summary>タイムアップ処理したかどうか</summary>
+    private bool _timeUpInit = false;
     #endregion
 
     #region Constant
@@ -118,23 +124,36 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
         _fishAmount = FISH_BASE;
         _vegetableAmount = VEGETABLE_BASE;
         _elementSum = _carbohydrateAmount + _meatAmount + _fishAmount + _vegetableAmount;
+    }
 
+    private void Start()
+    {
         //カウントダウン
         StartCoroutine(ThreeCountCoroutine());
     }
 
     private void Update()
     {
-        //タイムオーバーなら
-        if(_time <= 0 && _timeInit == false)
+        //残り30秒なら
+        if(_time <= 30 && _panelInit == false)
+        {
+            _hidePanel.SetActive(true);
+            _panelInit = true;
+        }
+
+        //タイムアップなら
+        if(_time <= 0 && _timeUpInit == false)
         {
             GamePlayEnd();
-            _timeInit = true;
+            _timeUpInit = true;
         }
+
         //プレイ可能なら処理実行
         if (CanPlay == false) return;
+
         //タイム経過
         _time -= Time.deltaTime;
+
         //テキスト更新
         _timeText.text = "Time:" + _time.ToString("F0");
         _scoreText.text = "Score:" + _score.ToString();
@@ -240,15 +259,21 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     public void GamePlayEnd()
     {
         ChangeCanPlay();
+
         _gameEndText.gameObject.SetActive(true);
+
+        //ゲームの終わり方によってテキスト変更
         if (_time <= 0)
         {
-            _gameEndText.text = "TimeOver!";
+            _gameEndText.text = "TimeUp!";
         }
         else
         {
             _gameEndText.text = "GameOver";
         }
+        //GameManagerにスコアを渡す
+        GameManager.Instance.SetScore(_score);
+
         StartCoroutine(PlayEndCoroutine());
     }
     #endregion
@@ -273,7 +298,7 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     /// </summary>
     private void GoResult()
     {
-        SceneController.Instance.ChangeScene("InGameScene", "ResultScene");
+        SceneController.Instance.ChangeScene(SceneName.InGameScene, SceneName.ResultScene);
     }
     #endregion
 
@@ -284,6 +309,10 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     /// <returns></returns>
     private IEnumerator ThreeCountCoroutine()
     {
+        //SE再生
+        AudioManager.Instance.PlaySE(AudioManager.Instance.CountDownSE);
+
+        //テキスト変更
         _countDownText.text = "3";
         yield return new WaitForSeconds(1);
         _countDownText.text = "2";
@@ -291,7 +320,14 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
         _countDownText.text = "1";
         yield return new WaitForSeconds(1);
         _countDownText.text = "Start!";
+
+        //プレイ可能に
         ChangeCanPlay();
+
+        //BGM再生
+        AudioManager.Instance.PlayBGM(AudioManager.Instance.InGameBGM);
+
+        //少し待ってテキストを非アクティブに
         yield return new WaitForSeconds(0.5f);
         _countDownText.gameObject.SetActive(false);
     }
@@ -303,6 +339,9 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     private IEnumerator PlayEndCoroutine()
     {
         yield return new WaitForSeconds(2);
+
+        //BGM停止
+        AudioManager.Instance.StopBGM();
         GoResult();
     }
     #endregion
