@@ -8,11 +8,15 @@ using UnityEngine;
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     #region property
+    public int Score => _score;
+    public int HighScore => _highScore;
     public Vector2 ScreenLeftBottom => _screenLeftBottom;
     public Vector2 ScreenRightTop => _screenRightTop;
     #endregion
 
     #region private
+    /// <summary>スコア格納用</summary>
+    private int _score = 0;
     /// <summary>ハイスコア</summary>
     private int _highScore = 0;
     /// <summary>画面左下</summary>
@@ -35,6 +39,19 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     #endregion
 
     #region public method
+    /// <summary>
+    /// スコア格納、ハイスコア判定
+    /// </summary>
+    /// <param name="score">スコア</param>
+    public void SetScore(int score)
+    {
+        _score = score;
+
+        if(_highScore < _score)
+        {
+            _highScore = _score;
+        }
+    }
     #endregion
 
     #region private method
