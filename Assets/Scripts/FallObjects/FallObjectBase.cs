@@ -25,6 +25,10 @@ public abstract class FallObjectBase : MonoBehaviour, IGetable
     [Tooltip("落下速度")]
     [SerializeField]
     protected int _fallSpeed = 10;
+
+    [Tooltip("エフェクトのプレハブ")]
+    [SerializeField]
+    protected GameObject _effectPrefab = default;
     #endregion
 
     #region protected
@@ -74,6 +78,7 @@ public abstract class FallObjectBase : MonoBehaviour, IGetable
         if (collision.CompareTag("Player"))
         {
             Get(ScoreAmount, CarbohydreatAmount, MeatAmount, FishAmount, VegetableAmount);
+            ObjectPool.Instance.GetGameObject(_effectPrefab, collision.transform.position);
             ObjectPool.Instance.ReleaseGameObject(gameObject);
         }
         else if (collision.CompareTag("Ground"))
