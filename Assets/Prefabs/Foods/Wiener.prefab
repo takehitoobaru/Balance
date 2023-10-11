@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 6e32372de5c94a64fbcc0ff36b0b8728, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -172,4 +172,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectData: {fileID: 11400000, guid: 92f2f50355461cb499e909c709816d21, type: 2}
-  _fallSpeed: 1
+  _fallSpeed: 2
+  _effectPrefab: {fileID: 7224146297807065058, guid: b0607b7831a59de42a926f18c2bbfc94, type: 3}
