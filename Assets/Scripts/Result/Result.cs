@@ -16,6 +16,10 @@ public class Result : MonoBehaviour
     [Tooltip("ハイスコアテキスト")]
     [SerializeField]
     private TextMeshProUGUI _highScoreText = default;
+
+    [Tooltip("ボタン押下を促すテキスト")]
+    [SerializeField]
+    private TextMeshProUGUI _pressAnyKeyText = default;
     #endregion
 
     #region private
@@ -32,7 +36,7 @@ public class Result : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.anyKeyDown)
         {
             if (_canChangeScene == false) return;
             AudioManager.Instance.StopBGM();
@@ -42,18 +46,23 @@ public class Result : MonoBehaviour
     #endregion
 
     #region coroutine method
+    /// <summary>
+    /// リザルト表示用のコルーチン
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ResultCoroutine()
     {
         //スコア表示
-        for (int i = 0; i <= GameManager.Instance.Score; i++)
-        {
-            _scoreText.text = "Score:" + i.ToString();
-            yield return null;
-        }
+        _scoreText.text = "Score:" + GameManager.Instance.Score.ToString();
+
         yield return new WaitForSeconds(1);
 
         //ハイスコア表示
         _highScoreText.text = "HighScore:" + GameManager.Instance.HighScore;
+
+        yield return new WaitForSeconds(0.5f);
+
+        _pressAnyKeyText.gameObject.SetActive(true);
 
         //シーン遷移可能に
         _canChangeScene = true;
