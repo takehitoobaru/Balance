@@ -305,6 +305,7 @@ MonoBehaviour:
   - {fileID: 7228006891628132989, guid: 2e9796ee83d4f744f84b57ba13971f86, type: 3}
   - {fileID: 6517784226815000552, guid: ccd4a11c1209ce14cb39fdf690e8bada, type: 3}
   - {fileID: 100645645401039893, guid: 278b571130fdb624faed4125b308aa59, type: 3}
+  - {fileID: 2816311023029302021, guid: 9c7a2ace3991e804c84c4c848c4059e7, type: 3}
   _notFoodPrefabs:
   - {fileID: 7527681628859979007, guid: 2cf3b62f36ef36041b18f7cfd072ee39, type: 3}
   - {fileID: 6055241000545757303, guid: d2f6b064761641348bc644c807ab061b, type: 3}
