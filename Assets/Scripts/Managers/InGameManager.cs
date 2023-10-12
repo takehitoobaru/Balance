@@ -9,6 +9,7 @@ using TMPro;
 public class InGameManager : SingletonMonoBehaviour<InGameManager>
 {
     #region property
+    public float TimeLimit => _timeLimit;
     public bool CanPlay => _canPlay;
     #endregion
 
@@ -46,7 +47,7 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     /// <summary>スコア</summary>
     private int _score = 0;
     /// <summary>タイム</summary>
-    private float _time = 120;
+    private float _timeLimit = 120;
     /// <summary>属性値の合計</summary>
     private float _elementSum = 0;
     /// <summary>炭水化物属性値</summary>
@@ -135,27 +136,27 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     private void Update()
     {
         //残り30秒なら
-        if(_time <= 30 && _panelInit == false)
+        if(_timeLimit <= 30 && _panelInit == false)
         {
             _hidePanel.SetActive(true);
             _panelInit = true;
         }
 
         //タイムアップなら
-        if(_time <= 0 && _timeUpInit == false)
+        if(_timeLimit <= 0 && _timeUpInit == false)
         {
-            GamePlayEnd();
             _timeUpInit = true;
+            GamePlayEnd();
         }
 
         //プレイ可能なら処理実行
         if (CanPlay == false) return;
 
         //タイム経過
-        _time -= Time.deltaTime;
+        _timeLimit -= Time.deltaTime;
 
         //テキスト更新
-        _timeText.text = "Time:" + _time.ToString("F0");
+        _timeText.text = "Time:" + _timeLimit.ToString("F0");
         _scoreText.text = "Score:" + _score.ToString();
     }
     #endregion
@@ -263,7 +264,7 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
         _gameEndText.gameObject.SetActive(true);
 
         //ゲームの終わり方によってテキスト変更
-        if (_time <= 0)
+        if (_timeLimit <= 0)
         {
             _gameEndText.text = "TimeUp!";
         }
@@ -338,10 +339,11 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     /// <returns></returns>
     private IEnumerator PlayEndCoroutine()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
 
         //BGM停止
         AudioManager.Instance.StopBGM();
+
         GoResult();
     }
     #endregion
