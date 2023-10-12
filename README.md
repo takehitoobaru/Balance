@@ -7,6 +7,7 @@
 ![Result](https://github.com/takehitoobaru/Balance/assets/88570413/5b917b18-8a2d-458e-aa69-746d0affe016)
 
 ゲームプレイURL  
+※フルスクリーンでのプレイをお願いします  
 https://takehitoobaru.github.io/Balance/
 # 操作説明
 プレイヤーは左右の矢印キーで移動して、落ちてくる食べ物を食べます。  
