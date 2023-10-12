@@ -5,6 +5,9 @@
 ![InGame](https://github.com/takehitoobaru/Balance/assets/88570413/f77f3c34-1974-4aff-af77-e7b90a939bd1)
 ・リザルト画面
 ![Result](https://github.com/takehitoobaru/Balance/assets/88570413/5b917b18-8a2d-458e-aa69-746d0affe016)
+
+ゲームプレイURL  
+https://takehitoobaru.github.io/Balance/
 # 操作説明
 プレイヤーは左右の矢印キーで移動して、落ちてくる食べ物を食べます。  
 制限時間内にたくさん食べてスコアを伸ばしましょう。  
