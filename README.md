@@ -1,4 +1,5 @@
 # FallFoods
+![Title](https://github.com/takehitoobaru/Balance/assets/88570413/00fd47d4-500a-4ae4-bf21-5b95a5a19ec3)
 # 操作説明
 プレイヤーは左右の矢印キーで移動して、落ちてくる食べ物を食べます。  
 制限時間内にたくさん食べてスコアを伸ばしましょう。  
