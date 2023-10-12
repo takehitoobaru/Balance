@@ -39,6 +39,8 @@ public class Spawner : MonoBehaviour
     private float _minPos = -8;
     /// <summary>最大ランダム位置</summary>
     private float _maxPos = 8;
+    /// <summary>クールタイムが短くなったかどうか</summary>
+    private bool _coolTimeInit = false;
     #endregion
 
     #region unity methods
@@ -51,6 +53,12 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         if (InGameManager.Instance.CanPlay == false) return;
+        //タイムが1分切っていたら
+        if(InGameManager.Instance.TimeLimit <= 60 && _coolTimeInit == false)
+        {
+            _spawnCoolTime = _spawnCoolTime / 2;
+            _coolTimeInit = true;
+        }
         _context.Update();
     }
     #endregion
