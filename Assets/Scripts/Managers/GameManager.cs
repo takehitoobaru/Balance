@@ -10,8 +10,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     #region property
     public int Score => _score;
     public int HighScore => _highScore;
-    public Vector2 ScreenLeftBottom => _screenLeftBottom;
-    public Vector2 ScreenRightTop => _screenRightTop;
     #endregion
 
     #region private
@@ -19,10 +17,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private int _score = 0;
     /// <summary>ハイスコア</summary>
     private int _highScore = 0;
-    /// <summary>画面左下</summary>
-    private Vector2 _screenLeftBottom;
-    /// <summary>画面右上</summary>
-    private Vector2 _screenRightTop;
     #endregion
 
     #region unity methods
@@ -33,8 +27,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private void Start()
     {
-        _screenLeftBottom = Camera.main.ScreenToWorldPoint(Vector2.zero);
-        _screenRightTop = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        SceneController.Instance.LoadTitleScene();
     }
     #endregion
 
