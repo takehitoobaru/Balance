@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region private
+    private float _leftLimitX;
+    private float _rightLimitX;
     /// <summary>横入力の値</summary>
     private float key = 0;
     /// <summary>コライダーのサイズの半分</summary>
@@ -39,8 +41,22 @@ public class PlayerController : MonoBehaviour
         _colHalfSize = _col.size.x / 2;
     }
 
+    private void Start()
+    {
+        var min = Camera.main.ViewportToWorldPoint(Vector2.zero);
+        var max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+        _leftLimitX = min.x;
+        _rightLimitX = max.x;
+    }
+
     private void Update()
     {
+        //移動可能範囲の制限
+        transform.position = new Vector2(Mathf.Clamp(transform.position.x,
+                                                     _leftLimitX + _colHalfSize,
+                                                     _rightLimitX - _colHalfSize),
+                                                     transform.position.y);
+
         //左右キーの入力
         key = Input.GetAxisRaw("Horizontal");
 
@@ -65,13 +81,6 @@ public class PlayerController : MonoBehaviour
             if (transform.localScale.x < 0) return;
             transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
-
-
-        //移動可能範囲の制限
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x,
-                                                     GameManager.Instance.ScreenLeftBottom.x + _colHalfSize,
-                                                     GameManager.Instance.ScreenRightTop.x - _colHalfSize),
-                                                     transform.position.y);
     }
 
     private void FixedUpdate()
