@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectType: 0
   _scoreAmount: 30
-  _carbohydreatAmount: 50
+  _carbohydreatAmount: 40
   _meatAmount: 0
   _fishAmount: 0
   _vegetableAmount: 0
