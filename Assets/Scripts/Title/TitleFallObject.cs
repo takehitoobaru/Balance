@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -20,6 +21,14 @@ public class TitleFallObject : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        if(SceneManager.GetActiveScene().name != "TitleScene")
+        {
+            ObjectPool.Instance.ReleaseGameObject(gameObject);
+        }
     }
 
     private void OnEnable()
