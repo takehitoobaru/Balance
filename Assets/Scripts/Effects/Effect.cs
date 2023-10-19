@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// エフェクト
@@ -13,7 +14,28 @@ public class Effect : MonoBehaviour
     private bool _isScoreUp = true;
     #endregion
 
+    #region private method
+    private PlayerController _player;
+    #endregion
+
     #region unity methods
+    private void Start()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
+
+    private void Update()
+    {
+        if (InGameManager.Instance.CanPlay == true)
+        {
+            transform.position = _player.transform.position;
+        }
+        else
+        {
+            ObjectPool.Instance.ReleaseGameObject(gameObject);
+        }
+    }
+
     private void OnEnable()
     {
         if(_isScoreUp == true)
@@ -24,6 +46,11 @@ public class Effect : MonoBehaviour
         {
             AudioManager.Instance.PlaySE(AudioManager.Instance.ScoreDownSE);
         }
+    }
+
+    private void OnParticleSystemStopped()
+    {
+        ObjectPool.Instance.ReleaseGameObject(gameObject);
     }
     #endregion
 
