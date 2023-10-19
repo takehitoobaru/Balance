@@ -173,4 +173,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectData: {fileID: 11400000, guid: 023c4cc42de27824a8d654043958a3d9, type: 2}
   _fallSpeed: 2
-  _effectPrefab: {fileID: 8282839927988979410, guid: cd7359ea11b211b48b2bd120b6f632bf, type: 3}
+  _effectPrefab: {fileID: 7756241774875094623, guid: 522a8d991a7010f44a60daa004885b3f, type: 3}
