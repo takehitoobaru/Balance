@@ -1,6 +1,6 @@
 # FallFoods
 ・タイトル画面
-![Title](https://github.com/takehitoobaru/Balance/assets/88570413/00fd47d4-500a-4ae4-bf21-5b95a5a19ec3)
+![スクリーンショット 2023-10-20 175444](https://github.com/takehitoobaru/Balance/assets/88570413/71847ab9-cb21-408c-be1c-aa0cbbc5c372)
 ・ゲーム画面
 ![InGame](https://github.com/takehitoobaru/Balance/assets/88570413/f77f3c34-1974-4aff-af77-e7b90a939bd1)
 ・リザルト画面
