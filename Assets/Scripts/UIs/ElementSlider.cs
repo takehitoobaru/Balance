@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// 属性値表示用スライダーの処理
@@ -13,6 +14,10 @@ public class ElementSlider : MonoBehaviour
     [Tooltip("属性の種類")]
     [SerializeField]
     private ElementType _elementType = default;
+
+    [Tooltip("テキスト")]
+    [SerializeField]
+    private TextMeshProUGUI _text = default;
     #endregion
 
     #region private
@@ -32,15 +37,19 @@ public class ElementSlider : MonoBehaviour
         {
             case ElementType.Carbohydreat:
                 InGameManager.Instance.OnCarbohydreatPercentChanged += ChangeSlider;
+                InGameManager.Instance.OnCarbohydreatPercentChanged += ChangeText;
                 break;
             case ElementType.Meat:
                 InGameManager.Instance.OnMeatPercentChanged += ChangeSlider;
+                InGameManager.Instance.OnMeatPercentChanged += ChangeText;
                 break;
             case ElementType.Fish:
                 InGameManager.Instance.OnFishPercentChanged += ChangeSlider;
+                InGameManager.Instance.OnFishPercentChanged += ChangeText;
                 break;
             case ElementType.Vegetable:
                 InGameManager.Instance.OnVegetablePercentChanged += ChangeSlider;
+                InGameManager.Instance.OnVegetablePercentChanged += ChangeText;
                 break;
             default:
                 break;
@@ -57,6 +66,12 @@ public class ElementSlider : MonoBehaviour
     private void ChangeSlider(float percent)
     {
         _slider.value = percent;
+    }
+
+    private void ChangeText(float percent)
+    {
+        var amount = percent * 100;
+        _text.text = amount.ToString("F1");
     }
     #endregion
 }
