@@ -19,11 +19,6 @@ public class Effect : MonoBehaviour
     #endregion
 
     #region unity methods
-    private void Start()
-    {
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-    }
-
     private void Update()
     {
         if (InGameManager.Instance.CanPlay == true)
@@ -38,7 +33,9 @@ public class Effect : MonoBehaviour
 
     private void OnEnable()
     {
-        if(_isScoreUp == true)
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+        if (_isScoreUp == true)
         {
             AudioManager.Instance.PlaySE(AudioManager.Instance.ScoreUpSE);
         }
