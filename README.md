@@ -4,7 +4,7 @@
 ・ゲーム画面
 ![スクリーンショット 2023-10-20 175521](https://github.com/takehitoobaru/Balance/assets/88570413/e8b4d79c-95ee-424d-b60f-0a38d7eddbce)
 ・リザルト画面
-![Result](https://github.com/takehitoobaru/Balance/assets/88570413/5b917b18-8a2d-458e-aa69-746d0affe016)
+![スクリーンショット 2023-10-20 175602](https://github.com/takehitoobaru/Balance/assets/88570413/3ad00b2c-1da2-40f9-811b-403776c55956)
 
 ゲームプレイURL  
 ※フルスクリーンでのプレイをお願いします  
